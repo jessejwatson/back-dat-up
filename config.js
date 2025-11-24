@@ -1,6 +1,7 @@
 const CONFIG = {
-    mountPoint: '/media/hdd2', // Adjust the mount point
-    backupDir: '/media/hdd2/back-dat-up', // Backup folder on the external drive
+    device: '/dev/sdb1',
+    mountPoint: '/media/ssd1', // Adjust the mount point
+    backupDir: '/media/ssd1/back-dat-up', // Backup folder on the external drive
     directoriesToBackup: [
         '/home/administrator/docker-volumes/'
     ],
@@ -11,7 +12,7 @@ const CONFIG = {
     //        if (err) console.error(`Error sending notification: ${stderr}`);
     //    });
     //},
-    maxBackups: 5, // Maximum number of backups to keep
+    maxBackups: 30, // Maximum number of backups to keep
 };
 
 module.exports = CONFIG;

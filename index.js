@@ -13,20 +13,28 @@ const logMessage = (message) => {
     fs.appendFileSync(LOG_FILE, formattedMessage, { flags: 'a' });
 };
 
-// Function to mount the drive
 const mountDrive = () => {
     return new Promise((resolve, reject) => {
-        exec(`mount ${CONFIG.mountPoint}`, (error) => {
-            error ? reject('Drive mount failed') : resolve();
+        exec(`mount ${CONFIG.device} ${CONFIG.mountPoint}`, (error) => {
+            if (error) {
+                logMessage(`Drive mount failed: ${error}`);
+                return reject('Drive mount failed');
+            }
+            logMessage('Drive mounted successfully');
+            resolve();
         });
     });
 };
 
-// Function to unmount the drive
 const unmountDrive = () => {
     return new Promise((resolve, reject) => {
         exec(`umount ${CONFIG.mountPoint}`, (error) => {
-            error ? reject('Drive unmount failed') : resolve();
+            if (error) {
+                logMessage(`Drive unmount failed: ${error}`);
+                return reject('Drive unmount failed');
+            }
+            logMessage('Drive unmounted successfully');
+            resolve();
         });
     });
 };
